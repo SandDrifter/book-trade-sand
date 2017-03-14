@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <% include ../partials/head %>
+</head>
+  <body>
+  <div class="row">
+          <header>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+              <!-- <% include ../partials/header %> -->
+          </header>
+    </div>
+
+<div class="container">
+
+<center>
+  <h2>Your uploaded books:</h2>
+</center>
+<div class="row">
+<center>
+    <!-- <button type="button" name="button" class="btn btn-primary" data-toggle="collapse" data-target="#bookForm">Insert Book</button> -->
+<div style="margin-bottom:20px;">
+  <button data-toggle="collapse" class="btn btn-primary" data-target="#demo">Upload a book</button>
+  <div id="demo" class="collapse">
+    <form class="" action="/myBooks" method="post">
+      <input type="text" name="bName" value="" placeholder="book's title" required="">
+      <input type="text" name="bAuthor" value="" placeholder="book's author" required="">
+      <input type="text" name="bImgUrl" value="" placeholder="book's image url" required="">
+      <input type="submit" name="" value="submit" class="btn btn-success">
+    </form>
+  <!-- Lorem ipsum dolor text.... -->
+  </div>
+  </center>
+  </div>
+</div>
+
+
+<div class="row">
+<%if(typeof books != "undefined"){var itemId=0; books.forEach(function(book) { itemId++; %>
+<div class="col-xs-4">
+  <ul>
+    <img src="<%=book.imgUrl%>" alt="book image" height="100" width="100">
+    <br>
+    <button data-toggle="collapse" class="btn btn-info" data-target="#collapseId<%-itemId%>" >More info</button>
+    <div id="collapseId<%-itemId%>"  class="collapse">
+    <li>book's id - <%= book.id %></li>
+    <li>title - <%= book.name %></li>
+    <li>author - <%= book.author %></li>
+    <li>owner's id - <%= book.owner %></li>
+  </div>
+  <br>
+    <button class="btn btn-danger" onClick="$.post( '/myBooksDelete?bookId=<%-book.id%>', function( data ) {console.log(data);document.location.href = '/myBooks'; })" >delete</button>
+  </ul>
+  </div>
+<% }); }%>
+</div>
+
+  <center><h2>Book requests:</h2></center>
+
+<div class="row">
+<%if(typeof booksOnTrade != "undefined"){var item2Id=0; booksOnTrade.forEach(function(book) { item2Id++; %>
+<div class="col-xs-4">
+  <ul>
+    <img src="<%=book.imgUrl%>" alt="book image" height="100" width="100">
+    <br>
+    <button data-toggle="collapse" class="btn btn-info" data-target="#collapse2Id<%-item2Id%>" >More info</button>
+    <div id="collapse2Id<%-item2Id%>"  class="collapse">
+      <li>id - <%= book.id %></li>
+      <li>title - <%= book.name %></li>
+      <li>author - <%= book.author %></li>
+      <li>owner - <%= book.owner %></li>
+  </div>
+  <br>
+    <button class="btn btn-success" onClick="$.post( '/myBooksDelete?bookId=<%-book.id%>', function( data ) {console.log(data);document.location.href = '/myBooks'; })" >Accept</button>
+    <button class="btn btn-warning" onClick="$.post( '/myBooksDecline?bookId=<%-book.id%>', function( data ) {console.log(data);document.location.href = '/myBooks'; })" >Decline</button>
+  </ul>
+  </div>
+<% }); }%>
+
+</div>
+
+
+
+
+    <footer>
+           <% include ../partials/footer %>
+   </footer>
+</div>
+  </body>
+</html>

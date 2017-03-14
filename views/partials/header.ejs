@@ -1,0 +1,20 @@
+<!-- views/partials/header.ejs -->
+ <nav>
+            <ul>
+                <div class="col-xs-3">
+                  <li><a id="menu-index" href="/auth" >Home</a></li>
+              </div>
+              <div class="col-xs-3">
+            <li>  <a  id="menu-books" href="/other/books" >All Books</a></li>
+            </div>
+            <div class="col-xs-3">
+        <li>    <a  id="menu-myBooks" href="/myBooks" >My Books</a></li>
+          </div>
+              <div class="col-xs-3">
+            <li>  <a  id="menu-login" href="/auth/loginPage" >Login</a></li>
+            </div>
+            </ul>
+            <script>
+                $( "#<%-NavMenu%>" ).addClass( "active" );
+            </script>
+ </nav>

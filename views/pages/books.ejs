@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <link rel="stylesheet" href="styles.css">
+      <title>Info page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+  <body>
+    <header>
+        <% include ../partials/header %>
+    </header>
+    <center>
+    <h2>Books on Trade</h2>
+  </center>
+      <div class="row">
+
+      <% var itemId=0;  books.forEach(function(book) { ++itemId; %>
+      <div class="col-xs-4">
+        <ul>
+          <img src="<%=book.imgUrl%>" alt="book image" height="100" width="100">
+          <br>
+          <button data-toggle="collapse" class="btn btn-info" data-target="#collapseId<%-itemId%>" >More info</button>
+          <div id="collapseId<%-itemId%>"  class="collapse">
+            <li>id - <%= book.id %></li>
+            <li>title - <%= book.name %></li>
+            <li>name - <%= book.name %></li>
+            <li>author - <%= book.author %></li>
+            <li>owner - <%= book.owner %></li>
+        </div>
+        <br>
+        <form action="/booksTrade?bookId=<%-book.id%>" method="POST">
+          <input type="submit" name=""  class="btn btn-success" value="Request Trade">
+          <!-- <button class="btn btn-success" onClick="$.post( '/booksTrade?bookId=<%-book.id%>', function( data ) {console.log(data);document.location.href = '/other/books'; })" >Request Trade</button> -->
+        </form>
+        </ul>
+        </div>
+      <% }); %>
+
+</div>
+
+    <footer>
+           <% include ../partials/footer %>
+   </footer>
+  </body>
+</html>
